@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="~/Scripts/tinh_tp.json"></script>
+    <script type="text/javascript" src="~/Scripts/dvhcvn.json"></script>
+</head>
+<body class="bg-black bg-opacity-75 pt-5 pb-5">
+    <nav class="navbar navbar-expand-md bg-black navbar-dark fixed-top z-3">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="logo">
+                <a class="navbar-brand-md" runat="server" href="~/"><i style="width:185px" class="topzone-logo"></i></a>
+            </div>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="mx-2" nav-item><a class="nav-link text-decoration-none active fw-bold fs-6" runat="server" href="~/">Trang chủ</a></li>
+                    <li class="mx-2" nav-item><a class="nav-link text-decoration-none active fw-bold fs-6" runat="server" href="@Url.Action("TraCuuDonDatHang","Home")"><i class="fa-solid fa-truck-fast"></i> Tra cứu đơn hàng</a></li>
+                    <li class="mx-2" nav-item><a class="search-cart-text nav-link text-decoration-none active" runat="server" href="@Url.Action("DangNhap","Home")">Tìm kiếm</a></li>
+                    <li class="mx-2" nav-item><a class="search-cart-text nav-link text-decoration-none active" runat="server" href="@Url.Action("GioHang","GioHang")">Giỏ hàng</a></li>
+                </ul>
+            </div>
+            <div class="float-end search-cart">
+                <form class="d-flex float-start position-relative">
+                    <div class="search-sp">
+                        <i class="topzone-search"></i>
+                    </div>
+                </form>
+                <a href="@Url.Action("GioHang","GioHang")" class="cart position-relative">
+                    <i class="topzone-cart"></i>
+                </a>
+                <a href="@Url.Action("DangNhap","Home")" class="cart">
+                    <i class="ps-1 text-white fa fa-user"></i>
+                </a>
+            </div>
+            <div class="d-none spinner-grow text-light"></div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer class="py-4 bg-light mt-auto bg-black fixed-bottom">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; Topzone 2024</div>
+                <div>
+                    <a href="#">Chính sách bảo mật</a>
+                    &middot;
+                    <a href="#">Điều khoản &amp; Điều kiện</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        fetch('../Scripts/dvhcvn.json')
+            .then((response) => response.json())
+            .then(data => {
+                console.log(data)
+                let provinces = data.data;
+                provinces.map(value => document.getElementById('provinces').innerHTML += `<option value='${value.name}'>${value.name}</option>`);
+            })
+            .catch(error => {
+                console.error('Lỗi khi gọi API:', error);
+            });
+        function fetchDistricts(provincesID) {
+            fetch('../Scripts/dvhcvn.json')
+                .then(response => response.json())
+                .then(data => {
+                    let districts = data.data.find(obj => obj.name === provincesID).level2s;
+                    document.getElementById('districts').innerHTML = `<option value=''>Quận/Huyện</option>`;
+                    if (districts !== undefined) {
+
+                        districts.map(value => document.getElementById('districts').innerHTML += `<option value='${value.name}'>${value.name}</option>`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi gọi API:', error);
+                });
+        }
+
+        function fetchWards(districtsID) {
+            fetch('../Scripts/dvhcvn.json')
+                .then(response => response.json())
+                .then(data => {
+                    var provincesID = document.getElementById('provinces').value
+                    let wards = data.data.find(obj => obj.name === provincesID).level2s.find(obj => obj.name === districtsID).level3s;
+                    document.getElementById('wards').innerHTML = `<option value=''>Phường/Xã</option>`;
+                    if (wards !== undefined) {
+                        wards.map(value => document.getElementById('wards').innerHTML += `<option value='${value.name}'>${value.name}</option>`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi gọi API:', error);
+                });
+        }
+
+        function getProvinces(event) {
+            fetchDistricts(event.target.value);
+        }
+
+        function getDistricts(event) {
+            fetchWards(event.target.value);
+        }
+
+    </script>
+
+</body>
+</html>
