@@ -15,9 +15,9 @@
     if (Session["cart"] == null)
     {
         <div class="container bg-light p-5 rounded-5 text-center mb-3">
-            <div><h2 class="backbtn text-bg-danger">Chưa có sản phẩm</h2></div>
+            <div><h2 class="fs-2 fw-bold text-dark">Bạn chưa có sản phẩm nào trong giỏ <i class="fa-regular fa-face-frown"></i></h2></div>
             <div><img class="w-25" src="~/Media/cartempty.png" /><br /></div>
-            <div>@Html.ActionLink("Mua sắm ngay!", "Index", "Home", null, new { @class = "backbtn text-decoration-none text-default fs-4", })</div>
+            <div>@Html.ActionLink("Mua sắm ngay!", "Index", "Home", null, new { @class = "text-decoration-none text-default fs-5", })</div>
         </div>
     }
     else

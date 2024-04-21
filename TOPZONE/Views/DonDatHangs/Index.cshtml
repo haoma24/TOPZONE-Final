@@ -1,0 +1,77 @@
+﻿@model IEnumerable<TOPZONE.DonDatHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Quản lý đơn đặt hàng</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-outline-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TriGia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenNguoiNhan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaChiNhan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SDTNguoiNhan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HTTT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrinhTrang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KhachHang.TenKH)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayDH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TriGia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenNguoiNhan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaChiNhan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SDTNguoiNhan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HTTT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrinhTrang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id = item.MaDH.TrimEnd() }) |
+            @Html.ActionLink("Chi tiết", "Details", new { id = item.MaDH.TrimEnd() }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.MaDH.TrimEnd() }) |
+            @Html.ActionLink("Duyệt", "Edit", new { id = item.MaDH.TrimEnd() })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,91 @@
+﻿@model TOPZONE.Models.DonHangModel
+@using System.Globalization
+@{
+    ViewBag.Title = "DonDangHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container h-100 w-auto">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-10 col-lg-8 col-xl-6">
+            <div class="card card-stepper w-auto" style="border-radius: 16px;">
+                <div class="card-header p-4 w-auto">
+                    <div>
+                        <label for="email" class="form-label">Mã đơn hàng <span class="text-danger">*</span></label>
+                        <div class="">
+                            @using (Html.BeginForm("DonDatHang", "Home", FormMethod.Post, new { @class = "d-flex justify-content-between" }))
+                            {
+                                @Html.TextBox("MaDH", null, new { @class = "form-control" })
+                                <button id="btnTraCuu" class="btn btn-outline-dark" type="submit">Tra cứu</button>
+                            }
+                            <p></p>
+                        </div>
+                    </div>
+                    <hr class="" />
+                    <div class="d-flex justify-content-between align-items-center w-auto">
+                        @foreach (var DH in Model.DH)
+                        {
+                            <div class="d-inline-grid">
+                                <p class="text-muted mb-2"> Mã đơn hàng <span class="fw-bold text-body">@DH.MaDH</span></p>
+                                <p class="text-muted mb-0"> Ngày đặt <span class="fw-bold text-body">@DH.NgayDH</span> </p>
+                                <hr />
+                                <p class="text-muted mb-0"> Người nhận <span class="fw-bold text-body">@DH.TenNguoiNhan</span> </p>
+                                <p class="text-muted mb-0"> Địa chỉ <span class="fw-bold text-body">@DH.DiaChiNhan</span> </p>
+                                <p class="text-muted mb-0"> Số điện thoại <span class="fw-bold text-body">@DH.SDTNguoiNhan</span> </p>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+                <div class="card-body p-4 w-auto">
+                    <div class="d-flex flex-row mb-4 pb-2">
+
+                        @foreach (var DH in Model.DH)
+                        {
+                            <div class="flex-fill">
+                                <div id="parent" class="d-flex w-100">
+                                    <div id="child1" class="w-75">
+                                        @foreach (var SP in Model.SanPham)
+                                        {
+                                            <div class="d-flex mt-3">
+                                                <div class="me-3 w-25"><img width="100" src="@SP.Hinh" /></div>
+                                                <div class="text-center align-content-center">
+                                                    <p>@SP.TenSP</p>
+                                                    <p>@SP.GiaBan</p>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+                                    <div id="child2" class="text-end w-25 d-grid">
+                                        @foreach (var CTDH in Model.CTDH)
+                                        {
+                                            <div class="mt-3">x @CTDH.SL</div>
+                                            <div>@string.Format("{0:C0}", CTDH.ThanhTien)</div>
+                                        }
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="text-end">
+                                    <h4 class="mb-3"> @string.Format("{0:C0}", DH.TriGia) <span class="small text-muted">  (@DH.HTTT) </span></h4>
+                                    <p class="text-muted">Tình trạng: <span class="text-body">@DH.TrinhTrang</span></p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
+                        <li class="step0 active" id="step1">
+                            <span style="margin-left: 22px; margin-top: 12px;">ĐÃ NHẬN</span>
+                        </li>
+                        <li class="step0 active text-center" id="step2"><span>ĐANG VẬN CHUYỂN</span></li>
+                        <li class="step0 text-muted text-end" id="step3">
+                            <span style="margin-right: 22px;">ĐÃ GIAO</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

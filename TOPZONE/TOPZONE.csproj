@@ -339,6 +339,25 @@
     <Content Include="Views\KhachHangs\Details.cshtml" />
     <Content Include="Views\KhachHangs\Edit.cshtml" />
     <Content Include="Views\KhachHangs\Index.cshtml" />
+    <Content Include="Views\Home\DangNhap.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Home\DatHang.cshtml" />
+    <Content Include="Views\Home\DonDatHang.cshtml" />
+    <Content Include="Views\Home\iPad.cshtml" />
+    <Content Include="Views\Home\iPhone.cshtml" />
+    <Content Include="Views\Home\Mac.cshtml" />
+    <Content Include="Views\Home\TraCuuDonDatHang.cshtml" />
+    <Content Include="Views\Home\Watch.cshtml" />
+    <Content Include="Views\DonDatHangs\Create.cshtml" />
+    <Content Include="Views\DonDatHangs\Delete.cshtml" />
+    <Content Include="Views\DonDatHangs\Details.cshtml" />
+    <Content Include="Views\DonDatHangs\Edit.cshtml" />
+    <Content Include="Views\DonDatHangs\Index.cshtml" />
+    <Content Include="Views\TaiKhoans\Create.cshtml" />
+    <Content Include="Views\TaiKhoans\Delete.cshtml" />
+    <Content Include="Views\TaiKhoans\Details.cshtml" />
+    <Content Include="Views\TaiKhoans\Edit.cshtml" />
+    <Content Include="Views\TaiKhoans\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

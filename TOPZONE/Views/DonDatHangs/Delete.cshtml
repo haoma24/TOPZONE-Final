@@ -1,0 +1,90 @@
+﻿@model TOPZONE.DonDatHang
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Xóa</h2>
+
+<h3>Bạn có chắc chắn muốn xóa đơn hàng này?</h3>
+<div>
+    <h4>Đơn đặt hàng</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TriGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TriGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNguoiNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNguoiNhan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChiNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChiNhan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SDTNguoiNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SDTNguoiNhan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HTTT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HTTT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrinhTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrinhTrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KhachHang.TenKH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhachHang.TenKH)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger mb-3 mt-3" /> |
+            @Html.ActionLink("Quay lại", "Index", null, new { @class = "text-decoration-none" })
+        </div>
+    }
+</div>

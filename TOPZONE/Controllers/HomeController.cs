@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -66,12 +67,63 @@ namespace TOPZONE.Controllers
         }
         public ActionResult DatHang(FormCollection form)
         {
-            string MaDH = "DH" + DateTime.Now.ToString("yyMMmmss");
+            List<GioHangModel> gioHangModels = (List<GioHangModel>)Session["cart"];
+            DonDatHang dh = new DonDatHang();
+            KhachHang kh = new KhachHang();
+            CTDonDatHang ctdh = new CTDonDatHang();
+            string MaDH = DateTime.Now.ToString("yyMMddms");
+            string MaKH = DateTime.Now.ToString("yyMMddms");
+            string NgayDH = DateTime.Now.ToString("dd/MM/yyyy");
+            DateTime NgayDHdt = DateTime.ParseExact(NgayDH, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            string TenKH = form["TenKH"];
+            string SDT = form["SDT"];
+            string HTTT = form["rbtnHTTT"];
+            string DiaChi = form["txtSoNha"] + ", " + form["ddlP"] + ", " + form["ddlQ"] + ", " + form["ddlTP"];
+            if (SDT == db.KhachHang.Where(x => x.SDT==SDT).Select(x => x.SDT).FirstOrDefault())
+            {
+                dh.MaDH = MaDH;
+                dh.TenNguoiNhan = TenKH;
+                dh.TriGia = null;
+                dh.DiaChiNhan = DiaChi;
+                dh.SDTNguoiNhan = SDT;
+                dh.HTTT = HTTT;
+                dh.NgayDH = NgayDHdt;
+                dh.TrinhTrang = "Đang xử lý";
+                string _MaKH = db.KhachHang.Where(x => x.SDT == SDT).Select(x => x.MaKH).First();
+                dh.MaKH = _MaKH;
+                db.DonDatHang.Add(dh);
+                db.SaveChanges();
+                foreach(var item in gioHangModels)
+                {
+                    ctdh.MaSP = item.Item.MaSP;
+                    ctdh.MaDH = MaDH;
+                }
+                
+
+
+            }
+            else
+            {
+                kh.SDT = SDT;
+                kh.TenKH = TenKH;
+                kh.Email = null;
+                kh.MaKH = MaKH;
+                db.KhachHang.Add(kh);
+                db.SaveChanges();
+                dh.MaDH = MaDH;
+                dh.TenNguoiNhan = TenKH;
+                dh.TriGia = null;
+                dh.DiaChiNhan = DiaChi;
+                dh.SDTNguoiNhan = SDT;
+                dh.HTTT = HTTT;
+                dh.NgayDH = NgayDHdt;
+                dh.TrinhTrang = "Đang xử lý";
+                dh.MaKH = MaKH;
+                db.DonDatHang.Add(dh);
+                db.SaveChanges();
+            }
+            ViewBag.SDT = SDT;
             ViewBag.MaDH = MaDH;
-            ViewBag.TenKH = form["TenKH"];
-            ViewBag.SDT = form["SDT"];
-            ViewBag.HTTT = form["rbtnHTTT"];
-            ViewBag.DiaChi = form["txtSoNha"] + ", " + form["ddlP"] + ", " + form["ddlQ"] + ", " + form["ddlTP"];
             return View();
         }
         public ActionResult iPhone()

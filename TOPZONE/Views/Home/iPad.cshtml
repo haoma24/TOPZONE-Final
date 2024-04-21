@@ -1,0 +1,37 @@
+﻿@model IEnumerable<TOPZONE.SanPham>
+@using System.Globalization
+@{
+    ViewBag.Title = "iPad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class=" d-flex item active justify-content-end">
+                <img style="border-radius:5px; width:100%" src="~/Media/Slider_2.png" alt="Slider">
+            </div>
+        </div>
+    </div>
+    <div id="category" class="row d-flex container justify-content-around">
+        <div class="col-2 mt-3 d-grid text-center pb-2 text-light fw-bold fs-6 align-content-center bg-opacity-25 bg-black justify-content-center rounded-2"><a href="@Url.Action("iPhone","Home")"><img width="150" src="~/Media/IP_Desktop.png" /></a>iPhone</div>
+        <div class="col-2 mt-3 d-grid text-center pb-2 text-light fw-bold fs-6 align-content-center bg-opacity-25 bg-black justify-content-center rounded-2"><a href="@Url.Action("iPad","Home")"><img width="150" src="~/Media/IPad_Desktop.png" /></a>iPad</div>
+        <div class="col-2 mt-3 d-grid text-center pb-2 text-light fw-bold fs-6 align-content-center bg-opacity-25 bg-black justify-content-center rounded-2"><a href="@Url.Action("Mac","Home")"><img width="150" src="~/Media/Mac_Desktop.png" /></a>Macbook</div>
+        <div class="col-2 mt-3 d-grid text-center pb-2 text-light fw-bold fs-6 align-content-center bg-opacity-25 bg-black justify-content-center rounded-2"><a href="@Url.Action("Watch","Home")"><img width="150" src="~/Media/Watch_Desktop.png" /></a>Watch</div>
+    </div>
+    <div class="text-center d-flex justify-content-center "><hr class="text-light w-75" /></div>
+    <div class="text-center text-light fw-bold fs-2 "><p>iPad</p></div>
+    <!-- PRODUCT -->
+    <div class="Iphone d-flex flex-wrap justify-content-evenly mt-2 position-sticky">
+        @foreach (var item in Model)
+        {
+            <div class="ip-item mt-5 w-30 popover align-content-center bg-opacity-25 bg-black justify-content-center pt-5 pb-5 rounded-5">
+                <div id="ProductImg" class="item-img align-content-center justify-content-center d-flex hover-zoom"><img style="width:75%" src="@item.Hinh" /></div>
+                <div class="item-name text-light w-100 d-flex mt-1 ps-3 pe-3 align-content-center text-center justify-content-center">@item.TenSP</div>
+                <div class="item-price w-100 text-light d-flex mt-1 justify-content-center fw-bold">@string.Format("{0:C0}", item.GiaBan)</div>
+                <div class="item-btn align-content-center mt-1 justify-content-center d-flex"><a href="@Url.Action("AddToCart", "GioHang", new { id = item.MaSP.TrimEnd() })" class="text-light text-decoration-none">Thêm vào giỏ</a></div>
+            </div>
+        }
+    </div>
+</main>
+

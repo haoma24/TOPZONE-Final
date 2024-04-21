@@ -1,0 +1,92 @@
+﻿@model TOPZONE.DonDatHang
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Đơn đặt hàng</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TriGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TriGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNguoiNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNguoiNhan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChiNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChiNhan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SDTNguoiNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SDTNguoiNhan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HTTT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HTTT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrinhTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrinhTrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KhachHang.TenKH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhachHang.TenKH)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div class="d-flex align-content-center align-items-center gap-2">
+        @using (Html.BeginForm("DonDatHang", "Home", FormMethod.Post))
+        {
+            @Html.TextBox("MaDH", null, new { @class = "form-control", value = Model.MaDH.TrimEnd(), type = "hidden" })
+            <button id="btnTraCuu" class="btn btn-outline-primary" type="submit">Chi tiết đơn hàng</button>
+        } 
+        |
+        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaDH.TrimEnd() }, new { @class = "btn btn-outline-primary" })|
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "text-decoration-none" })
+    </div>
+
+</p>
